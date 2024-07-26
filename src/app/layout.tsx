@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const bricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"], variable: '--font-bricolage-grotesque' });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={bricolageGrotesque.className}>
         <Navbar />
-        {children}</body>
+        {children}
+        <Footer/>
+        </body>
     </html>
   );
 }

@@ -6,89 +6,67 @@ import { ArrowRight } from "lucide-react";
 // import { useAuth } from "@/lib/useAuth";
 import { useState, useEffect } from "react";
 
-const logOut = () => {
-  
-}
+const logOut = () => {};
 
 const Navbar = () => {
+    const [user, setUser] = useState<string | null>();
+    // const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-  const [user, setUser] = useState<string | null>();
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    return (
+        <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-900 bg-zinc-800 backdrop-blur-lg transition-all text-white">
+            <MaxWidthWrapper>
+                <div className="flex h-14 items-center justify-between border-b border-zinc-900">
+                    <Link
+                        href="/"
+                        className="flex z-40 font-semibold text-white"
+                    >
+                        Focus<span className="text-green-600">Up</span>
+                    </Link>
 
-  return (
-    <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
-      <MaxWidthWrapper>
-        <div className="flex h-14 items-center justify-between border-b border-zinc-200">
-        <Link href="/" className="flex z-40 font-semibold">
-            Focus<span className="text-green-600">Up</span>
-          </Link>
-
-          <div className="h-full flex items-center space-x-4">
-            {user ? (
-              <>
-                <button
-                  onClick={logOut}
-                  className={buttonVariants({ size: "sm", variant: "ghost" })}
-                >
-                  {" "}
-                  Sign out
-                </button>
-                {isAdmin ? (
-                  <Link
-                    href="/api/auth/logout"
-                    className={buttonVariants({ size: "sm", variant: "ghost" })}
-                  >
-                    {" "}
-                    Dashboard ✨
-                  </Link>
-                ) : null}
-                <Link
-                  href="/configure/upload"
-                  className={buttonVariants({
-                    size: "sm",
-                    className: " hidden sm:flex items-center gap-1 ",
-                  })}
-                >
-                  {" "}
-                  Create case
-                  <ArrowRight className="ml-1.5 h-5 w-5" />
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/auth/register"
-                  className={buttonVariants({ size: "sm", variant: "ghost" })}
-                >
-                  {" "}
-                  Sign up
-                </Link>
-                <Link
-                  href="/auth/login"
-                  className={buttonVariants({ size: "sm", variant: "ghost" })}
-                >
-                  {" "}
-                  Login
-                </Link>
-                <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
-                <Link
-                  href="/configure/upload"
-                  className={buttonVariants({
-                    size: "sm",
-                    className: "hidden sm:flex items-center gap-1",
-                  })}
-                >
-                  {" "}
-                  Create case
-                  <ArrowRight className="ml-1.5 h-5 w-5" />
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </MaxWidthWrapper>
-    </nav>
-  );
+                    <div className="h-full flex items-center space-x-4">
+                        <>
+                            {user ? (
+                                <button
+                                    onClick={logOut}
+                                    className={buttonVariants({
+                                        size: "sm",
+                                        variant: "ghost",
+                                    })}
+                                >
+                                    {" "}
+                                    Sign out
+                                </button>
+                            ) : (
+                                <Link
+                                    href="/auth/signin"
+                                    className={buttonVariants({
+                                        size: "sm",
+                                        variant: "ghost",
+                                    })}
+                                >
+                                    {" "}
+                                    Sign In
+                                </Link>
+                            )}
+                            <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
+                            <Link
+                                href="/leaderboard"
+                                className={buttonVariants({
+                                    size: "sm",
+                                    className:
+                                        "hidden sm:flex items-center gap-1 bg-green-700",
+                                })}
+                            >
+                                {" "}
+                                Leaderboard
+                                <ArrowRight className="ml-1.5 h-5 w-5" />
+                            </Link>
+                        </>
+                    </div>
+                </div>
+            </MaxWidthWrapper>
+        </nav>
+    );
 };
 
 export default Navbar;
